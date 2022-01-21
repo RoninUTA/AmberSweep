@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# This script is designed to connect to the Twitter Stream and collect all
+# twitter data associated with the hashtag AmberAlert
+
+DATE=$(date +%Y-%m-%d)
+ELEMENTS="created_at,id_str,coordinates,lang,source,screen_name,text" 
+TOPIC="AMBER Alert"
+STREAMER=$(python /home/pi/apps/twitterStreamer/streamer/streamer.py -f "\""$ELEMENTS"\"" "\""$TOPIC"\"")
+#echo $DATE
+#echo $ELEMENTS
+#echo $TOPIC
+#echo "\""$ELEMENTS"\"" "\""$TOPIC"\""
+
+$STREAMER>>/home/pi/amberAlert/$DATE.csv
+
